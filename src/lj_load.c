@@ -177,7 +177,7 @@ LUA_API int lua_dump(lua_State *L, lua_Writer writer, void *data)
   uint32_t flags = LJ_FR2*BCDUMP_F_FR2;  /* Default mode for legacy C API. */
   lj_checkapi(L->top > L->base, "top slot empty");
   if (tvisfunc(o) && isluafunc(funcV(o)))
-    return lj_bcwrite(L, funcproto(funcV(o)), writer, data, flags);
+    return lj_bcwrite(L, funcproto(funcV(o)), writer, data, flags | BCDUMP_F_DETERMINISTIC);
   else
     return 1;
 }
